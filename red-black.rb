@@ -120,47 +120,4 @@ class RedBlack
     end
   end
 
-  def to_s
-    rv = []
-    q = []
-    q << root
-    until q.empty?
-      working = q.shift
-      str = ""
-      if working
-        str += "#{working.value}"
-        str += "*" if working.red
-        q << working.left
-        q << working.right
-      else
-        str += "."
-        q << nil
-        q << nil
-      end
-      q = [] unless q.any?
-      rv << str
-    end    
-    spaces1 = rv.length
-    level = 0
-    new_line = true
-    rv = rv.map.with_index do |val, i|
-      spaces = spaces1/(level+1)
-      val = " "*spaces + val if new_line
-      if i.odd?
-        val += " "*(spaces)
-      else
-        val += "  "*(spaces/2)
-      end
-      if i+2 == 2**(level+1)
-        new_line = true
-        level +=1
-        val += "\n"
-      else
-        new_line = false
-      end
-      val
-    end
-    rv.join("")
-  end
-
 end
