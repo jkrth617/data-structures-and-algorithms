@@ -95,9 +95,7 @@ class RedBlack
     directions_array = get_directional_methods(current.value, current.parent.value)
     detached = current.parent
     current.parent = current.grandparent
-    if current.parent
-      current.value > current.parent.value ? current.parent.right = current : current.parent.left = current
-    end
+    current.value > current.parent.value ? current.parent.right = current : current.parent.left = current
     detached.parent = current
     detached.send(directions_array[0], current.send(directions_array[1]))
     current.send(directions_array[2], detached)  
