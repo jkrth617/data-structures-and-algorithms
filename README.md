@@ -11,7 +11,7 @@ Red Black trees are my favorite type of binary tree. I learned AVL trees first, 
 
 #### Graphs
 ##### Adjacency List
-My first implementation of a graph is a Directed Adjacency List. I think Adjacency Lists are my prefered style of implementing a graph. The Adjacency Matrix is a very large structure(NxN) and a lot of the information is redundant or unnecessary. In loosely connected graphs a lot of the info in the matrix is a ‘0’ or non-connection. Also in undirected graphs, half of the structure is redundant because the matrix is symmetric on the main diagonal axis(usually depicted as the axis running from top left to bottom right). 
+My first implementation of a graph is a Directed Adjacency List. I think Adjacency Lists are my prefered style of implementing a graph. The Adjacency Matrix is a very large structure(NxN) and a lot of the information is redundant or unnecessary. In loosely connected graphs a lot of the info in the matrix is a ‘0’ or non-connection. Also in undirected graphs, half of the structure is redundant because the matrix is symmetric on the main diagonal axis(usually depicted as the axis running from top left to bottom right).  
 To re-familiarize myself with the graph data structure, I do plan to continue to implement the different representations. Next, I want to implement an Adjacency Matrix and then the Vertex List + Edge List.  
 
 ####  Sorting
