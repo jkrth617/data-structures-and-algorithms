@@ -112,8 +112,24 @@ class AdjacencyList
     false
   end
 
-  def connected_bfs?(current, target)
+  def connected_bfs?(current, target)#again not nodes but info
+    discovered = {}
+    search_q = Q.new
+    search_q.add(current)
+    until search_q.empty? do 
+      working = search_q.remove
+      return true if working.info == target
+      discovered[working.info] = true
+      add_all_connections(list[working.info], search_q, discovered)
+    end
+    false
+  end
 
+  def add_all_connections(current_node, q, discovered)
+    while current_node do
+      q.add(current_node.ending) unless discovered[current_node.ending]
+      current_node = current_node.next
+    end
   end
 
   def to_s
