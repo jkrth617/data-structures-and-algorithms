@@ -1,5 +1,55 @@
 require 'pry'
 
+class Node
+
+  attr_reader :info
+  attr_accessor :next
+
+  def initialize(info)
+    @info = info
+    @next = nil
+  end
+
+end
+
+class Q
+
+  attr_accessor :head
+
+  def initialize
+    @head = nil
+  end
+
+  def empty?
+    !head
+  end
+
+  def add(insert_info)#not inserting a node but rather a piece of info
+    insert_node = Node.new(insert_info)
+    if empty?
+      self.head = insert_node
+    else
+      current = head
+      while current.next
+        current = current.next
+      end
+      current.next = insert_node
+    end
+  end
+
+  def remove
+    if empty?
+      false
+    else
+      dettached = head
+      self.head = head.next
+      dettached
+    end
+  end
+
+end
+
+
 class Edge
 
   attr_reader :ending, :weight
@@ -60,6 +110,10 @@ class AdjacencyList
       connection = connection.next
     end
     false
+  end
+
+  def connected_bfs?(current, target)
+
   end
 
   def to_s
