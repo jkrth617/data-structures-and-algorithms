@@ -101,4 +101,15 @@ class MyHash
     end
   end
 
+  def to_s
+    container.each_with_object([]).with_index do |(ele, memo), index|
+      hash_string = index.to_s
+      while ele
+        hash_string += " -->(#{ele.key},#{ele.value})"
+        ele = ele.next
+      end
+      memo << hash_string
+    end.join("\n")
+  end
+
 end
