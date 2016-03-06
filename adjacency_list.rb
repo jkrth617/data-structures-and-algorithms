@@ -144,13 +144,3 @@ class AdjacencyList
   end
 
 end
-
-my_graph = AdjacencyList.new
-my_graph.add(:a)
-my_graph.add(:b)
-my_graph.add(:c)
-my_graph.connect(:a, :b)
-my_graph.connect(:b, :c)
-my_graph.connect(:c, :b)
-binding.pry
-puts "eof"
