@@ -53,16 +53,10 @@ end
 class Edge
 
   attr_reader :ending, :weight
-  attr_accessor :next
   
   def initialize(ending, weight = 1)
     @ending = ending
     @weight = weight
-    @next = nil
-  end
-
-  def self.add_to_tail(current, insertion_edge)
-    current.next ? self.add_to_tail(current.next, insertion_edge) : current.next = insertion_edge
   end
 
 end
@@ -77,17 +71,16 @@ class AdjacencyList
   end
 
   def add(vertex)
-    list[vertex] = nil
+    list[vertex] = []
   end
 
   def include?(vertex)
-    list.keys.include?(vertex)
+    !!list[vertex]
   end
 
   def connect(starting, ending, weight = nil)
     if include?(starting) and include?(ending) 
-      new_connection = Edge.new(ending)
-      list[starting] ? Edge.add_to_tail(list[starting], new_connection) : list[starting] = new_connection
+      list[starting] << Edge.new(ending)
     else
       puts "invalid connection"
     end
@@ -104,10 +97,9 @@ class AdjacencyList
   end
 
   def connected_dfs?(current, ending)#current and ending are just the names of the connections NOT an edge obj or anything fancy
-    connection = list[current]
-    while connection do 
-      return true if connection.ending == ending or connected_dfs?(connection.ending, ending)
-      connection = connection.next
+    connections = list[current]
+    connections.each  do |edge|
+      return true if edge.ending == ending or connected_dfs?(edge.ending, ending)
     end
     false
   end
@@ -125,19 +117,17 @@ class AdjacencyList
     false
   end
 
-  def add_all_connections(current_node, q, discovered)
-    while current_node do
-      q.add(current_node.ending) unless discovered[current_node.ending]
-      current_node = current_node.next
+  def add_all_connections(connection_list, q, discovered)
+    connection_list.each do |current|
+      q.add(current.ending) unless discovered[current.ending]
     end
   end
 
   def to_s
-    list.each_with_object([]) do |(vertex, edge), memo|
+    list.each_with_object([]) do |(vertex, connection_array), memo|
       connection_string = vertex.to_s
-      while edge
+      connection_array.each do |edge|
         connection_string += " -->#{edge.ending}"
-        edge = edge.next
       end
       memo << connection_string
     end.join("\n")
